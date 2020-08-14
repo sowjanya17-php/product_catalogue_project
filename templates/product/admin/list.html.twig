@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block title %}Product List{% endblock %}
+{% block stylesheets %}
+{{ parent()}}
+<link rel="stylesheet" href="{{ asset('css/admin/list.css') }}">
+{% endblock %}
+{% block body %}
+{% for message in app.flashes('prod_add_sucess') %}
+<div class="alert alert-success" style="text-align:center;">
+   {{ message }}
+</div>
+{% endfor %}
+<div class="container py-5">
+   <!-- For demo purpose -->
+   <div class="row text-center text-white mb-5">
+      <div class="col-lg-7 mx-auto">
+         <h1 class="display-4">Products List</h1>
+         </p>
+      </div>
+   </div>
+   <!-- End -->
+   <div class="row">
+      <div class="col-lg-8 mx-auto">
+         <form METHOD="POST">
+            <!-- List group-->
+            <ul class="list-group shadow">
+               {% if products  %}
+               {% for product in products %}
+               <!-- list group item-->
+               <li class="list-group-item">
+                  <!-- Custom content-->
+                  <div class="media align-items-lg-center flex-column flex-lg-row p-3" style="text-align:right">
+                     <div class="media-body order-2 order-lg-1">
+                        <h5 class="mt-0 font-weight-bold mb-2" style="color:black;">{{product.name}}</h5>
+                        <p class="font-italic text-muted mb-0 small">{{product.description}}</p>
+                        <h6 class="font-weight-bold my-2" style="text-align:right;color:black;">${{product.price}}</h6>
+                        <div class="action" style="padding-top:30px;">
+                           <a href="{{path('product_admin_delete',{'product_id':product.id})}}" ><button   style="font-size: 10px;" class="add-to-cart btn btn-default" type="button">Delete Product</button></a>
+                           <a href="/product/admin/edit/{{product.id}}"><button style="font-size: 10px;" class="like btn btn-default" type="button">Edit Product</button></a>
+                        </div>
+                     </div>
+                     <a href="/product/admin/details/{{product.id}}"><img src="{{ asset('uploads/brochures/' ~ product.FileName) }}"  alt="Generic placeholder image" width="200" class="ml-lg-2 order-1 order-lg-5"></a>
+                     <input type="hidden" value="{{product.id}}" name="product_id">
+                  </div>
+                  <!-- End -->
+               </li>
+               <!-- End -->
+               {% endfor %}  
+               {% else %}
+               <li class="list-group-item">
+                  <!-- Custom content-->
+                  <p style="color:black;text-align:center;font-weight:bold;">No Products to display</p>
+                  <!-- End -->
+               </li>
+               {% endif%}
+            </ul>
+            <!-- End -->
+      </div>
+      </form>	
+   </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block title %}Product List{% endblock %}
+{% block stylesheets %}
+     {{ parent() }}
+    {{ encore_entry_link_tags('product') }}
+{% endblock %}
+{% block body %}
+
+<div class="container py-5">
+
+  <!-- For demo purpose -->
+  <div class="row text-center text-white mb-5 mt-5">
+    <div class="col-lg-7 mx-auto">
+      <h1 class="display-4">Products List</h1>
+      
+      </p>
+    </div>
+  </div>
+  <!-- End -->
+
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+
+      <!-- List group-->
+      <ul class="list-group shadow">
+	  {% if products  %}
+	  {% for product in products %}
+
+        <!-- list group item-->
+        <li class="list-group-item">
+          <!-- Custom content-->
+          <div class="media align-items-lg-center flex-column flex-lg-row p-3" style="text-align:right">
+            <div class="media-body order-2 order-lg-1">
+              <h5 class="mt-0 font-weight-bold mb-2">{{product.name}}</h5>
+              <p class="font-italic text-muted mb-0 small">{{product.description}}</p>
+                <h6 class="font-weight-bold my-2" style="text-align:right">${{product.price}}</h6>
+			 <a href="/product/details/{{product.id}}"> <button  class="add-to-cart add-to-cart btn btn-default  mb-0 small">View Details</button></a>
+            </div><a href="/product/details/{{product.id}}"><img src="{{ asset('uploads/brochures/' ~ product.FileName) }}"  alt="Generic placeholder image" width="200" class="ml-lg-2 order-1 order-lg-5"></a>
+          </div>
+          <!-- End -->
+        </li>
+        <!-- End -->
+       {% endfor %}  
+
+       {% else %}
+	   
+	   <li class="list-group-item">
+          <!-- Custom content-->
+          <p style="text-align:center;font-weight:bold;">No Products to display</p>
+          <!-- End -->
+        </li>
+	   
+	   {% endif%}
+
+      </ul>
+      <!-- End -->
+    </div>
+  </div>
+</div>
+{% endblock %}

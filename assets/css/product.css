@@ -1,0 +1,39 @@
+body {
+  background: #00b09b;
+  background: -webkit-linear-gradient(to right, #00b09b, #96c93d);
+  background: linear-gradient(to right, #00b09b, #96c93d);
+  min-height: 100vh;
+}
+
+.text-gray {
+  color: #aaa;
+}
+.a{
+	text-align:right;
+}
+.black{
+	color:black;
+}
+.logout{
+	color: rgba(0,0,0,.5);
+}
+
+
+.logout:hover{
+	text-decoration: none;
+	background-color: transparent;
+	color:black;
+}
+
+.add-to-cart, .like {
+  background: #ff9f1a;
+  padding: 0.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+  -webkit-transition: background .3s ease;
+          transition: background .3s ease; }
+.add-to-cart:hover, .like:hover {
+    background: #b36800;
+    color: #fff; }

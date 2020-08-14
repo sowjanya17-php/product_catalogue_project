@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product Details{% endblock %}
+
+{% block javascripts %}
+          {{ encore_entry_script_tags('comm_approve') }}
+        {% endblock %}
+
+{% block stylesheets %}
+     {{ parent() }}
+    {{ encore_entry_link_tags('new') }}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+ <div class="row text-center text-white mb-5 mt-5">
+    <div class="col-lg-7 mx-auto">
+      <h3 class="display-4">Product Details</h3>
+      
+      </p>
+    </div>
+  </div>
+	{% for message in app.flashes('comments_approval') %}
+            <div class="alert alert-success" style="text-align:center;">
+                {{ message }}
+            </div>
+    {% endfor %}
+
+		<div class="card">
+
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+						<div class="preview-pic tab-content img">
+						  <div class="tab-pane active" id="pic-1"><img src="{{ asset('uploads/brochures/' ~ product.FileName) }}" /></div>
+						</div>
+					</div>
+					<div class="details col-md-6 ">
+						<h3 class="product-title" >{{product.name}}</h3>
+						<p class="product-description black">{{product.description}}</p>
+						<h4 class="price">Product price: <span>${{product.price}}</span></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="card">
+			<div class="container-fliud">
+			<div class="wrapper row">
+					<div class="col-md-12">
+						 <div class="page-header" style="border-bottom: 1px solid #3c763d;color:black">
+                    <h1> Comments </h1>
+                  </div>
+				  <form name="user_comments" id="user_comments"  method="post">
+				  <div class="comments-list">
+				  
+				  <input type="hidden" id="updated_comment_id" name="updated_comment_id" value="">
+				  <input type="hidden" id="submit_value" name="submit_value" value="">
+				  
+				   {% if user_comments %}
+							{% for comment in user_comments %}
+                       <div class="media">
+							<div class="media-body mt-3 black">
+                             Added By :  <h4 class="media-heading user_name">{{comment.createdBy}}</h4>
+                             {{comment.comment}}
+                            </div>
+							{% if (comment.approved == '0' or comment.approved == '2')%}
+							<button   type="button" id="{{comment.id}}"  style="margin-left:308px;" class="add-to-list approve mt-3" value="approve" />Approve</button>
+							{% endif%}
+							{% if comment.approved == '0' or comment.approved == '1'%}
+							<button  type="button" id="{{comment.id}}" style="margin-left:100px;" class="add-to-list reject mt-3" value="reject" >Reject</button>
+							{% endif%}
+                         </div>
+						 
+					{% endfor %}
+						{% else%}
+						<div class="media">
+							<div class="media-body">
+                              <h4 class="media-heading user_name black mt-5 mb-5">No Comments awaiting for Approval</h4>
+                            </div>
+                         </div>
+						 {% endif%}
+						 
+                   </div>
+				   </form>
+					</div>
+					
+				</div>
+			
+			</div>
+		</div>
+	</div>
+{% endblock %}

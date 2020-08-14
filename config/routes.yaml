@@ -1,3 +1,24 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+app_Task_new:
+    path: /task/
+    controller: App\Controller\TaskController::new
+app_product_admin_list:
+    path: /product/admin/list
+    controller : APP\Controller\ProductController::list_admin
+app_product_list:
+    path: /product/list
+    controller : APP\Controller\ProductController::list
+app_product_admin_delete:
+    path: /product/admin/delete
+    controller : APP\Controller\ProductController::delete
+app_cart_cart:
+    path: /cart
+    controller : APP\Controller\CartController::cart
+app_checkout:
+    path: /shipping
+    controller : APP\Controller\ShippingController::index
+app_order_details:
+    path: /order/details
+    controller : APP\Controller\OrderDeatilsController::index
+app_thanks_order:
+    path: /order/success
+    controller : APP\Controller\OrderDeatilsController::success
